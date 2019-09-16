@@ -6,82 +6,83 @@
 /*   By: lbuang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 11:42:19 by lbuang            #+#    #+#             */
-/*   Updated: 2019/09/12 14:38:06 by lbuang           ###   ########.fr       */
+/*   Updated: 2019/09/16 10:18:30 by lbuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ls.h"
 
-void	ft_print_type(t_file tmp)
+void					ft_printinfo(struct stat st)
 {
-	if (S_ISDIR(tmp()->st_mode))
-		ft_foldername(tmp()->name);
-	else if (S_ISLNK(tmp()->node)
-		ft_symbolic_link(tmp, flag);
-	else if (((tmp)->st_mode > 0) && S_IEXEC && (tmp)->st_mode)
-		ft_execute((tmp)->name);
-	else if (S_ISREG(tmp)->st_mode)
+	struct group		*p;
+
+	ft_putnbr((int)st.st_nlink);
+	ft_putchar('	');
+/ }
+	p = getgrgid(st.st_gid);
+	ft_putstr(p->gr_name);
+	ft_putchar('	');
+	ft_putnbr((long long)st.st_size);
+	ft_putchar('	');
+}
+
+void					ft_printtime(struct stat st)
+{
+	int					c;
+	char				date_time[100];
+
+	ft_memset(date_time, 0, sizeof(date_time));
+		ft_strncpy(date_time, ctime(&st.st_mtime), sizeof(date_time));
+	c = 0;
+	while (date_time[c] != '\0')
+	{
+		if (date_time[c] == '\n')
+		{
+			date_time[c] = '\0';
+		}
+		c++;
+	}
+	ft_putstr(date_time);
+	ft_putchar(' ');
+}
+
+void					ft_print_type(t_files *tmp, t_flags flags)
+{
+	if (S_ISDIR((tmp)->st_mode))
+		ft_folder_color_r((tmp)->name);
+	else if (S_ISLNK((tmp)->st_mode))
+		ft_symlinkcolor(tmp, flags);
+	else if (((tmp)->st_mode > 0) && (S_IEXEC & (tmp)->st_mode))
+		ft_exec_color_r((tmp)->name);
+	else if (S_ISREG((tmp)->st_mode))
 		ft_putendl((tmp)->name);
 	else
 		ft_putchar('\0');
 }
 
-void	ft_time(struct stat st, t_flags flag)
+void					ft_print_r(t_files *tmp, t_flags flags)
 {
-	int c;
-	char date[50];
-
-	ft_memset(date, 0, sizeof(date));
-	ft_strcpy(date, ctime(&st.st_mode), sizeof(date));
-	c = 0;
-	while (date[c] != '\0')
+	if (!flags.a)
 	{
-		if (date[c] == '\n')
-			date[c] = '\0';
-		c++;
-
-	}
-	ft_putstr(date);
-	ft_putchar(" ");
-}
-
-void	print_info(struct stat st)
-{
-	struct group *ptr;
-
-	ft_putnbr((int)st.st_nlink);
-	ft_putchar(' ');
-
-	ptr = getgrgid(st.st_gid); 						//google
-	ft_putstr(ptr->gr_name);
-	ft_putchar(" ");
-	ft_putnbr((long)st.st_size);					//google
-	ft_putchar(' ');
-}
-
-void	ft_recursion(t_files *tmp, t_flags flag)
-{
-	if (!flag.a)
-	{
-		if (tmp->name[0] != ".")
+		if (tmp->name[0] != '.')
 		{
-			if (flag.l == TRUE)
+			if (flags.l == TRUE)
 			{
-				ft_print_permission(tmp->stat);
-				print_info()(tmp->stat);	//read about STAT
-				ft_time(tmp->stat);
+				ft_printpermissions(tmp->stat);
+				ft_printinfo(tmp->stat);
+				ft_printtime(tmp->stat);
 			}
-			ft_print_type(tmp, flag);
+			ft_print_type(tmp, flags);
 		}
 	}
 	else
 	{
 		if (flags.l == TRUE)
 		{
-			ft_print_permission(tmp->stat);
-			print_info()(tmp->stat);	//read about STAT
-			ft_time(tmp->stat);
+			ft_printpermissions(tmp->stat);
+			ft_printinfo(tmp->stat);
+			ft_printtime(tmp->stat);
 		}
-		ft_print_type(tmp, flag);
+		ft_print_type(tmp, flags);
 	}
 }
