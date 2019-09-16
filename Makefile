@@ -6,7 +6,7 @@
 #    By: lbuang <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/10 11:05:38 by lbuang            #+#    #+#              #
-#    Updated: 2019/09/16 14:13:05 by lbuang           ###   ########.fr        #
+#    Updated: 2019/09/16 14:14:26 by lbuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = ft_ls
 
 FLAGS = -g -Wall -Wextra -Werror -I includes						# the rule for building ls
 
-SRCS = srcs/main.c \
+SRC = src/main.c \
 			src/printcolor.c \
 			src/checks.c \
 			src/flags.c \
@@ -33,14 +33,14 @@ SRCS = srcs/main.c \
 			src/free.c \
 			src/exit.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
 
 
 $(NAME):  $(OBJS)
 	@make -C libft
-	gcc $(FLAGS) $(SRCS) -I libft/libft.h libft/libft.a
+	gcc $(FLAGS) $(SRC) -I libft/libft.h libft/libft.a
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
