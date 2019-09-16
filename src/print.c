@@ -6,7 +6,7 @@
 /*   By: lbuang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 11:42:19 by lbuang            #+#    #+#             */
-/*   Updated: 2019/09/16 10:18:30 by lbuang           ###   ########.fr       */
+/*   Updated: 2019/09/16 14:26:43 by lbuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void					ft_printinfo(struct stat st)
 
 	ft_putnbr((int)st.st_nlink);
 	ft_putchar('	');
-/ }
 	p = getgrgid(st.st_gid);
 	ft_putstr(p->gr_name);
 	ft_putchar('	');
