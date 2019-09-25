@@ -6,7 +6,7 @@
 /*   By: lbuang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 11:42:19 by lbuang            #+#    #+#             */
-/*   Updated: 2019/09/16 14:26:43 by lbuang           ###   ########.fr       */
+/*   Updated: 2019/09/25 11:18:07 by lbuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void					ft_printinfo(struct stat st)
 	struct group		*p;
 
 	ft_putnbr((int)st.st_nlink);
-	ft_putchar('	');
+	ft_putchar(' ');
 	p = getgrgid(st.st_gid);
 	ft_putstr(p->gr_name);
 	ft_putchar('	');
@@ -31,7 +31,7 @@ void					ft_printtime(struct stat st)
 	char				date_time[100];
 
 	ft_memset(date_time, 0, sizeof(date_time));
-		ft_strncpy(date_time, ctime(&st.st_mtime), sizeof(date_time));
+	ft_strncpy(date_time, ctime(&st.st_mtime), sizeof(date_time));
 	c = 0;
 	while (date_time[c] != '\0')
 	{
