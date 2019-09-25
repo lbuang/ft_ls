@@ -6,14 +6,14 @@
 #    By: lbuang <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/10 11:05:38 by lbuang            #+#    #+#              #
-#    Updated: 2019/09/25 13:48:55 by lbuang           ###   ########.fr        #
+#    Updated: 2019/09/25 14:33:00 by lbuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_ls
+NAME = ft_ls.a
 
 
-FLAGS =  -Wall -Wextra -Werror -I includes -o ft_ls						# the rule for building ls
+FLAGS =  -Wall -Wextra -Werror -o ft_ls						# the rule for building ls
 
 SRC = src/main.c \
 			src/printcolor.c \
